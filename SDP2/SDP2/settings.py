@@ -111,13 +111,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '2100031677cseh@gmail.com' # replace with your email address
-EMAIL_HOST_PASSWORD = 'guzgrhnuwcjmyzoi' # replace with your email password or app password if using two-factor authentication
+ # replace with your email password or app password if using two-factor authentication
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
