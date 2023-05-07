@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <style>
+        body {
+          background-color: black;
+        }
+      
+        th,
+        td {
+          color: white;
+          border: 1px solid white;
+          font-size: 18px;
+          padding: 10px;
+          text-align: center;
+        }
+
+        .navbar{
+    width: 85%;
+    margin: 0;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 120px;
+    cursor: pointer;
+}
+
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: rgb(234, 228, 228);
+    text-transform: uppercase;
+}
+
+.navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #808080 ;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+
+}
+
+.navbar ul li:hover:after{
+    width: 100%;
+
+
+}
+
+      
+        .table {
+          margin: auto;
+          width: 80%;
+          border-collapse: collapse;
+          table-layout: fixed;
+        }
+      
+        .container {
+          padding-top: 50px;
+        }
+      
+        h1 {
+          text-align: center;
+          color: white;
+          font-size: 3rem;
+          margin-top: 30px;
+        }
+      
+        button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          margin-right: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+        }
+      
+        button.mark-read {
+          background-color: green;
+          color: white;
+        }
+      
+        button.mark-read:hover {
+          background-color: #008000;
+        }
+      
+        button.delete-read {
+          background-color: red;
+          color: white;
+        }
+      
+        button.delete-read:hover {
+          background-color: #FF0000;
+        }
+
+        .delete-btn {
+            background-color: rgb(255, 0, 0);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 150px;
+            margin-bottom: 20px;
+        }
+
+        .read-btn {
+            background-color: rgb(14, 124, 234);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+      </style>
+      
+</head>
+<body>
+    <div class="navbar">
+        <img src="logo.png" alt="" class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/Explore">Explore</a></li>
+          <li><a href="/Aboutus">About</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          {% if user.is_authenticated %}
+             {% if user.is_superuser %}
+             <li><a href="/contact_list">Contact List</a></li>
+             <li><a href="/booking_list">Booking List</a></li>
+             {% endif %}
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li><a href="/Login">Log In</a></li>
+			  	<li><a href="/signup">Sign Up</a></li>
+          {% else %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="/Profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    <div class="container">
+        <h1>Contact List</h1>
+        <form action="{% url 'delete_read_contacts' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete Read Contacts</button>
+        </form>
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Problem</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.problem }}</td>
+                    <td>
+                        {% if not contact.is_read %}
+                        <form action="{% url 'contact_list' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="contact_id" value="{{ contact.id }}">
+                            <button type="submit" class="read-btn">Mark as Read</button>
+                        </form>
+                        {% else %}
+                        Read
+                        {% endif %}
+                    </td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+            
+          </table>
+      </div>
+</body>
+</html>

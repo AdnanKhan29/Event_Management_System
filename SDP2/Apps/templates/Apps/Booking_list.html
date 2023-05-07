@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking List</title>
+    <style>
+
+        h1 {
+          text-align: center;
+          color: white;
+          font-size: 3rem;
+          margin-top: 30px;
+        }
+
+        th{
+          color: white;
+          border: 1px solid white;
+          font-size: 18px;
+          padding: 10px;
+          text-align: center;
+        }
+
+        .navbar{
+    width: 85%;
+    margin: 0;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 120px;
+    cursor: pointer;
+}
+
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: rgb(234, 228, 228);
+    text-transform: uppercase;
+}
+
+.navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #808080 ;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+
+}
+
+.navbar ul li:hover:after{
+    width: 100%;
+
+
+}
+
+        .my-table {
+          background-color: black;
+          color: white;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        .my-cell {
+          padding: 18px;
+          border: 1px solid white;
+          text-align: center;
+        }
+        
+        button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          margin-right: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+        }
+      
+        button.mark-read {
+          background-color: green;
+          color: white;
+        }
+      
+        button.mark-read:hover {
+          background-color: #008000;
+        }
+      
+        button.delete-read {
+          background-color: red;
+          color: white;
+        }
+      
+        button.delete-read:hover {
+          background-color: #FF0000;
+        }
+
+        .delete-btn {
+            background-color: rgb(255, 0, 0);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 150px;
+            margin-bottom: 20px;
+        }
+
+        .read-btn {
+            background-color: rgb(14, 124, 234);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        </style>
+        
+</head>
+<body style="background-color: black;">
+    <div class="navbar">
+        <img src="logo.png" alt="" class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/Explore">Explore</a></li>
+          <li><a href="/Aboutus">About</a></li>
+          <li><a href="/Booking">Booking</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          {% if user.is_authenticated %}
+             {% if user.is_superuser %}
+             <li><a href="/contact_list">Contact List</a></li>
+             <li><a href="/booking_list">Booking List</a></li>
+             {% endif %}
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li><a href="/Login">Log In</a></li>
+			  	<li><a href="/signup">Sign Up</a></li>
+          {% else %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="/Profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    <div class="container">
+        <h1>Booking List</h1>
+        <form action="{% url 'delete_read_bookings' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete Read Bookings</button>
+        </form>
+        <table class="my-table">
+            <thead>
+              <tr>
+                <th >S.No</th>
+                <th >Name</th>
+                <th >Email</th>
+                <th >Phone</th>
+                <th >Event</th>
+                <th >Date</th>
+                <th >Time</th>
+                <th >Duration</th>
+                <th >Venue</th>
+                <th >Address</th>
+                <th >City</th>
+                <th >State</th>
+                <th >Zipcode</th>
+                <th >Guests</th>
+                <th >Budget</th>
+                <th >Catering</th>
+                <th >Audio Visual</th>
+                <th >Photography</th>
+                <th >Videography</th>
+                <th >Decorations</th>
+                <th >Other</th>
+                <th >Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for booking in bookings %}
+              <tr>
+                <td class="my-cell">{{ forloop.counter }}</td>
+                <td class="my-cell">{{ booking.name }}</td>
+                <td class="my-cell">{{ booking.email }}</td>
+                <td class="my-cell">{{ booking.phone }}</td>
+                <td class="my-cell">{{ booking.event }}</td>
+                <td class="my-cell">{{ booking.date }}</td>
+                <td class="my-cell">{{ booking.time }}</td>
+                <td class="my-cell">{{ booking.duration }}</td>
+                <td class="my-cell">{{ booking.venue }}</td>
+                <td class="my-cell">{{ booking.address }}</td>
+                <td class="my-cell">{{ booking.city }}</td>
+                <td class="my-cell">{{ booking.state }}</td>
+                <td class="my-cell">{{ booking.zipcode }}</td>
+                <td class="my-cell">{{ booking.guests }}</td>
+                <td class="my-cell">{{ booking.budget }}</td>
+                <td class="my-cell">{{ booking.catering }}</td>
+                <td class="my-cell">{{ booking.audioVisual }}</td>
+                <td class="my-cell">{{ booking.Photography }}</td>
+                <td class="my-cell">{{ booking.videography }}</td>
+                <td class="my-cell">{{ booking.decorations }}</td>
+                <td class="my-cell">{{ booking.other }}</td>
+                <td class="my-cell">
+                    {% if not booking.is_reads %}
+                    <form action="{% url 'booking_list' %}" method="POST">      
+                        {% csrf_token %}
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                        <button type="submit" class="read-btn">Mark as Read</button>
+                    </form>
+                    {% else %}
+                    Read
+                    {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+      </div>
+</body>
+</html>

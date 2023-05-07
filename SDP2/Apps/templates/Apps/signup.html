@@ -1,0 +1,37 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>LOGIN</title>
+</head>
+<body>
+    <div class="container">
+                <div class="logo">
+                    <h3 class="tag">Register Now!</h3>
+                    <br/>
+                    <p class="tag">Book your event now!</p>
+                </div>
+                <div class="box">
+                    {% if error_message %}
+	                   <p style="color: red">{{ error_message }}</p>
+                    {% endif %}
+                    <form action="signup" method="post">
+                        {% csrf_token %}
+                        <input class="fill" type="text" name="username" placeholder="Username">
+                        <input class="fill" type="email" name="email" placeholder="Email address">
+                        <input class="fill" type="password" name="password1" placeholder="Password">
+                        <input class="fill" type="password" name="password2" placeholder="Confirm Password">
+                        <input type="Submit" value="Register">
+                        <p class="center" id="for-pass"><a href="/Login">Already have an account?</a></p>
+                        <div class="bar"></div>
+                        <button><a href="/Login">Login</a></button>
+                    </form>
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+    </div>
+</body>
+</html>

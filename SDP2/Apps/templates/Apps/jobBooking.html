@@ -1,0 +1,309 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'bookings.css' %}">
+  <link rel="img" href="{% static 'logo.png'}">
+  <title>Home</title>
+</head>
+<body>
+      <div class="navbar">
+        <img src="logo.png" alt="" class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/Explore">Explore</a></li>
+          <li><a href="/Aboutus">About</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          {% if user.is_authenticated %}
+          {% if user.is_superuser %}
+             <li><a href="/contact_list">Contact List</a></li>
+             <li><a href="/booking_list">Booking List</a></li>
+             {% endif %}
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li><a href="/Login">Log In</a></li>
+      <li><a href="/signup">Sign Up</a></li>
+          {% else %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="/Profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="container">
+        <h1>Job Hosting Form</h1>
+        <form action="" method="post">
+              {% csrf_token %}
+          <div class="row">
+            <div class="col">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name">
+            </div>
+            <div class="col">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="col">
+              <label for="servicetype">Type of Job</label>
+              <select id="servicetype" name="servicetype" required>
+                <option value="" selected disabled>Select an job</option>
+                <option value="catering">Catering</option>
+                <option value="audioVisual">Audio Visual</option>
+                <option value="photography">Photography</option>
+                <option value="videography">Videography</option>
+                <option value="decorations">Decorations</option>
+              </select>
+            </div>
+          </div>
+          <div class="catering-fields additional-fields">
+          <div class="row">
+            <label for="cateringtype">Catering Type</label>
+              <select id="cateringtype" name="cateringtype" required>
+                <option value="" selected disabled>Select an catering type</option>
+                <option value="buffet">Buffet</option>
+                <option value="plated">Plated</option>
+                <option value="familystyle">Family Style</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="menuitems">Menu Items</label>
+                <select id="menuitems" name="menuitems" required>
+                    <option value="" selected disabled>Select the menu</option>
+                    <option value="appetizers">Appetizers</option>
+                    <option value="entrees">Entrees</option>
+                    <option value="desserts">Desserts</option>
+                  </select>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="dietres">Dietaries</label>
+                <select id="dietres" name="dietres" required>
+                    <option value="" selected disabled>Select the dietaries</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="non-vegan">Non-Vegan</option>
+                    <option value="vegornon">Vegan and Non vegan</option>
+                  </select>
+            </div>
+            <div class="col">
+              <label for="bevrages">Bevarages</label>
+                <select id="bevrages" name="bevarages" required>
+                    <option value="" selected disabled>Select the beverages</option>
+                    <option value="openbar">Open Bar</option>
+                    <option value="cashar">Cash Bar</option>
+                    <option value="softdrinks">Soft drinks Only</option>
+                  </select>
+            </div>
+          </div>
+        </div>
+        <div class="audioVisual-fields additional-fields">
+            <div class="row">
+              <div class="col">
+                <label for="avname">Head Office</label>
+                <input type="text" id="avname" name="avname">
+              </div>
+                <div class="col">
+                <label for="equipment">Audio Visuals</label>
+                <select id="equipment" name="equipment" required>
+                    <option value="type of Equipment" selected disabled>Select the type of Equipments</option>
+                    <option value="projector">Projector</option>
+                    <option value="speaker">Speaker</option>
+                    <option value="microphone">Microphone</option>
+                  </select>
+                </div>
+                  <div class="row">
+                <label for="avquantity">Quantity of Equipment</label>
+              <input type="text" id="avquantity" name="avquantity">
+            </div>
+              <div class="col">
+              <label for="techsupp">Technical Support</label>
+                <select id="techsupp" name="techsupp" required>
+                    <option value="Technical Support" selected disabled>Select the type Technical Support</option>
+                    <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+            </div>
+            </div>
+        </div>
+
+              <div class="photography-fields additional-fields">
+          <div class="row">
+            <div class="col">
+            <label for="photographytype">Photography Type</label>
+              <select id="photographytype" name="photographytype" required>
+                <option value="" selected disabled>Select a Photography Type</option>
+                <option value="portrait">Portrait</option>
+                <option value="candid">Candid</option>
+                <option value="event">event</option>
+              </select>
+            </div>
+            <div class="col">
+            <label for="duration">Duration</label>
+              <select id="duration" name="duration" required>
+                <option value="" selected disabled>Select Duration</option>
+                <option value="hours">hours</option>
+                <option value="half-day">half-day</option>
+                <option value="full-day">full-day</option>
+              </select>
+            </div>
+            </div>
+                <div class="row">
+                <div class="col">
+            <label for="style">Style</label>
+              <select id="style" name="style" required>
+                <option value="" selected disabled>Select a Style of Photography</option>
+                <option value="traditional">traditional</option>
+                <option value="artistic">artistic</option>
+                <option value="documentary">documentary</option>
+              </select>
+            </div>
+                  <div class="col">
+            <label for="location">Location</label>
+              <select id="location" name="location" required>
+                <option value="" selected disabled>Select a Type of Location</option>
+                <option value="indoor">Indoor</option>
+                <option value="outdoor">Outdoor</option>
+                <option value="specific sites">Specific Sites</option>
+              </select>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col">
+            <label for="delivery">Delivery of Photos</label>
+              <select id="delivery" name="delivery" required>
+                <option value="" selected disabled>Select a Delivery of Photos</option>
+                <option value="digital files">digital files</option>
+                <option value="prints">prints</option>
+                <option value="albumns">albumns</option>
+              </select>
+            </div>
+                  <div class="col">
+            <label for="additional">Additional Services</label>
+              <select id="additional" name="additional" required>
+                <option value="" selected disabled>Select Additional Services</option>
+                <option value="retouching">retouching</option>
+                <option value="editing">editing</option>
+                <option value="printing">printing</option>
+              </select>
+                </div>
+
+          </div>
+              </div>
+          <div class="videography-fields additional-fields">
+          <div class="row">
+            <div class="col">
+            <label for="vivideography">Videography</label>
+              <select id="vivideography" name="vivideography" required>
+                <option value="" selected disabled>Select a Videography Type</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Corporate">Corporate</option>
+                <option value="Promotional">Promotional</option>
+              </select>
+            </div>
+             <div class="col">
+            <label for="viduration">Duration</label>
+              <select id="viduration" name="viduration" required>
+                <option value="" selected disabled>Select Duration</option>
+                <option value="hours">hours</option>
+                <option value="half-day">half-day</option>
+                <option value="full-day">full-day</option>
+              </select>
+             </div>
+          </div>
+            <div class="row">
+                <div class="col">
+            <label for="vistyle">Style</label>
+              <select id="vistyle" name="vistyle" required>
+                <option value="" selected disabled>Select a Style of Videography</option>
+                <option value="traditional">cinematic</option>
+                <option value="artistic">storytelling</option>
+                <option value="documentary">documentary</option>
+              </select>
+            </div>
+              <div class="col">
+            <label for="vilocation">Location</label>
+              <select id="vilocation" name="vilocation" required>
+                <option value="" selected disabled>Select a Type of Location</option>
+                <option value="indoor">Indoor</option>
+                <option value="outdoor">Outdoor</option>
+                <option value="specific sites">Specific Sites</option>
+              </select>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col">
+            <label for="videlivery">Delivery of Videos</label>
+              <select id="videlivery" name="videlivery" required>
+                <option value="" selected disabled>Select a Delivery of Videos</option>
+                <option value="digital files">digital files</option>
+                <option value="prints">DVD</option>
+                <option value="albumns">blu-ray</option>
+              </select>
+            </div>
+                  <div class="col">
+            <label for="viadditional">Additional Services</label>
+              <select id="viadditional" name="viadditional" required>
+                <option value="" selected disabled>Select Additional Services</option>
+                <option value="color correction<">color correction</option>
+                <option value="editing">editing</option>
+                <option value="sound design">sound design</option>
+              </select>
+                </div>
+            </div>
+          </div>
+          <div class="decoration-fields additional-fields">
+          <div class="row">
+            <div class="col">
+            <label for="dedecoration">Decoration</label>
+            <select id="dedecoration" name="dedecoration" required>
+              <option value="" selected disabled>Select a Decoration Type</option>
+              <option value="floral arrangements,">floral arrangements,</option>
+              <option value=" centerpieces"> centerpieces</option>
+              <option value="lighting">lighting</option>
+            </select>
+          </div>
+          <div class="col">
+              <label for="quantity">Quantity of Decorations</label>
+            <input type="text" id="quantity" name="quantity">
+          </div>
+        </div>
+        </div>
+
+          <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+      // Get the select element and additional fields
+      var serviceTypeSelect = document.getElementById('servicetype');
+      var additionalFields = document.querySelectorAll('.additional-fields');
+
+      // Hide all additional fields on page load
+      for (var i = 0; i < additionalFields.length; i++) {
+          additionalFields[i].style.display = 'none';
+      }
+
+      // Show the additional fields for the selected option
+      serviceTypeSelect.addEventListener('change', function() {
+          // Hide all additional fields
+          for (var i = 0; i < additionalFields.length; i++) {
+              additionalFields[i].style.display = 'none';
+          }
+
+          // Show the additional fields for the selected option
+          var selectedOption = this.options[this.selectedIndex].value;
+          var selectedFields = document.querySelector('.' + selectedOption + '-fields');
+          if (selectedFields) {
+              selectedFields.style.display = 'block';
+          }
+      });
+  </script>
+
+</body>
+</html>
+

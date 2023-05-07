@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Host request Page</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      }
+      .card {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #333;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+      }
+      input[type="text"], input[type="email"] {
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        background-color: #444;
+        color: white;
+        width: 100%;
+      }
+      input[type="submit"] {
+        background-color: #fff;
+        color: black;
+        border: none;
+        padding: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 10px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Enter Your Information</h1>
+      <form action="#" method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </body>
+</html>

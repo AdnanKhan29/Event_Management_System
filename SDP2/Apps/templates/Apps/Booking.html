@@ -1,0 +1,211 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'bookings.css' %}">
+  <link rel="img" href="{% static 'logo.png'}"> 
+  <title>Home</title>
+</head>
+<body>
+      <div class="navbar">
+        <img src="logo.png" alt="" class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/Explore">Explore</a></li>
+          <li><a href="/Aboutus">About</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          {% if user.is_authenticated %}
+
+          
+             {% if user.is_superuser %}
+             <li><a href="/contact_list">Contact List</a></li>
+             <li><a href="/booking_list">Booking List</a></li>
+             {% endif %}
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li><a href="/Login">Log In</a></li>
+			  	<li><a href="/signup">Sign Up</a></li>
+          {% else %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="/Profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="container">
+        <h1>Event Booking Form</h1>
+        <form method="post">
+              {% csrf_token %}
+          <div class="row">
+            <div class="col">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name">
+            </div>
+            <div class="col">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="col">
+              <label for="event">Event</label>
+              <select id="event" name="event" required>
+                <option value="" selected disabled>Select an event</option>
+                <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday</option>
+                <option value="corporate">Corporate</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+  
+                <div class="date-container row">
+            <div class="col">
+              <label for="date">Date</label>
+              <input type="date" name="date" id="date" />
+            <script>
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
+            </script>
+
+            </div>
+            <div class="col">
+              <label for="time">Time</label>
+              <input type="time" id="time" name="time">
+            </div>
+          </div>
+          <div class="row">
+          <div class="col">
+            <label for="duration">Duration:</label>
+            <select id="duration" name="duration" required>
+              <option value="">Select the duration of the event</option>
+              <option value="1 hour">1 hour</option>
+              <option value="2 hours">2 hours</option>
+              <option value="3 hours">3 hours</option>
+              <option value="4 hours">4 hours</option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="venue">Venue:</label>
+            <input type="text" id="venue" name="venue" required>
+          </div>
+            </div>
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" placeholder="Enter your city" required>
+            </div>
+            <div class="col">
+              <label for="state">State</label>
+              <input type="text" id="state" name="state" placeholder="Enter your state" required>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col">
+            <label for="zipcode">Zip Code:</label>
+            <input type="number" id="zipcode" name="zipcode" required>
+          </div>
+          <div class="col">
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" name="guests" min="1" required onchange="updateBudget()">
+
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="catering">Catering</label>
+              <select id="catering" name="catering" required onchange="updateBudget()">
+                <option value="" selected disabled>Select Yes or No</option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="audioVisual">Audio-Visual Equipment</label>
+              <select id="audioVisual" name="audioVisual" required onchange="updateBudget()">
+                <option value="" selected disabled>Select Yes or No</option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="Photography">Photography</label>
+              <select id="Photography" name="Photography" required onchange="updateBudget()">
+                <option value="" selected disabled>Select Yes or No</option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="videography">Videography</label>
+              <select id="videography" name="videography" required onchange="updateBudget()">
+                <option value="" selected disabled>Select Yes or No</option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="decorations">Decorations</label>
+              <select id="decorations" name="decorations" required onchange="updateBudget()">
+                <option value="" selected disabled>Select Yes or No</option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+              </select>
+            </div>
+            <div class="col">
+            <label for="budget">Budget:</label>
+            <input type="number" id="budget" name="budget" min="0" onchange="updateBudget()" readonly>
+            <br><br>
+          </div>
+          </div>
+
+            <label for="other">Other Requirements:</label>
+            <textarea id="other" name="other" rows="5"></textarea><br><br>
+            <input type="submit" value="Submit">
+          </form>
+      </div>
+  <script>
+            function updateBudget(){
+              const guests = document.getElementById("guests").value;
+              const catering = document.getElementById("catering").value;
+              const audioVisual = document.getElementById("audioVisual").value;
+              const Photography = document.getElementById("Photography").value;
+              const videography = document.getElementById("videography").value;
+              const decorations = document.getElementById("decorations").value;
+
+              let budget = 0;
+               budget+= guests * 200;
+              if (catering === "True") {
+                budget += 10000;
+              }
+              if (audioVisual === "True") {
+                budget += 10000;
+              }
+              if (Photography === "True") {
+                budget += 10000;
+              }
+              if (videography === "True") {
+                budget += 10000;
+              }
+              if (decorations === "True") {
+                budget += 10000;
+              }
+              document.getElementById("budget").value = budget;
+            }
+          </script>
+</body>
+</html>

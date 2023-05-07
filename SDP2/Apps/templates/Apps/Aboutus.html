@@ -1,0 +1,183 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'about.css' %}">
+  <link rel="img" href="{% static 'logo.png'}"> 
+  <title>Home</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+    
+    html {
+      box-sizing: border-box;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    
+    .column {
+      float: left;
+      width: 33.3%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+    
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin: 8px;
+    }
+    
+    .about-section {
+      padding: 10px;
+      text-align: center;
+      background-color: #474e5d;
+      color: white;
+    }
+    
+    .container {
+      padding: 0 16px;
+      color: white;
+    }
+    
+    .container::after, .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    .title {
+      color: rgb(255, 255, 255);
+    }
+    
+    .button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: rgb(0, 0, 0);
+      background-color: #ffffff;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .button:hover {
+      background-color: #555;
+    }
+    
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+      }
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="banner">
+      <div class="navbar">
+        <img src="logo.png" alt="" class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/Explore">Explore</a></li>
+          <li><a href="/Booking">Booking</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          {% for group in request.user.groups.all %}
+          {% if group.name == 'ServiceMan' %}
+          <li><a href="/jobBooking">jobBooking</a></li>
+          {% endif %}
+          {% endfor %}
+          {% if user.is_authenticated %}
+             {% if user.is_superuser %}
+             <li><a href="/contact_list">Contact List</a></li>
+             <li><a href="/booking_list">Booking List</a></li>
+             {% endif %}
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li><a href="/Login">Log In</a></li>
+			  	<li><a href="/signup">Sign Up</a></li>
+          {% else %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="/Profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="about-section">
+        <h1>About US</h1>
+        <p>Event Managing</p>
+      </div>
+      
+      <h2 style="text-align:center">Our Team</h2>
+      <div class="row">
+        <div class="column">
+          <div class="card">
+      
+            <div class="container">
+              <h2>Adnan</h2>
+              <p class="title">TEAM LEAD</p>
+              <p>Contact Mr.Adnan for updates</p>
+              <p>adnan@gmail.com</p>
+              <p><button class="button" onclick="window.location.href = '/Contact';">Contact</button></p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+      
+            <div class="container">
+              <h2>Varsha</h2>
+              <p class="title">Art Director</p>
+              <p>Contact Ms.Varsha regarding Events Planning</p>
+              <p>varsha@gmail.com</p>
+              <p><button class="button" onclick="window.location.href = '/Contact';">Contact</button></p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+             
+            <div class="container">
+              <h2>Goutham</h2>
+              <p class="title">Designer</p>
+              <p>Contact Mr.Goutham regarding transaction issues</p>
+              <p>goutham@gmail.com</p>
+              <p><button class="button" onclick="window.location.href = '/Contact';">Contact</button></p>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div>
+      
+    </div>
+    <footer>
+      <div class="container">
+        <p>Contact us for any queries:</p>
+        <a href="tel:1234567890" class="contact">Call us</a>
+        <a href="mailto:info@eventmanagementsystem.com" class="contact">Email us</a>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 Event Management System. All Rights Reserved.</p>
+      </div>
+    </footer>
+</body>
+</html>

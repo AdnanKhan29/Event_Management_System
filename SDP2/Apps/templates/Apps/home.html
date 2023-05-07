@@ -1,0 +1,78 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'home.css' %}">
+  <title>Home</title>
+</head>
+<body>
+    <div class="banner">
+      <div class="navbar">
+        <img src="/static/logo.png" alt="" class="logo">
+        <ul>
+          <li><a href="/Explore">Explore</a></li>
+          <li><a href="/Booking">Booking</a></li>
+          {% for group in request.user.groups.all %}
+          {% if group.name == 'ServiceMan' %}
+          <li><a href="/jobBooking">jobBooking</a></li>
+          {% endif %}
+          {% endfor %}
+          <li><a href="/Aboutus">About</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="/contact">Contact Us</a></li>
+             {% if user.is_superuser %}
+             <li><a href="/contact_list">Contact List</a></li>
+             <li><a href="/booking_list">Booking List</a></li>
+             {% endif %}
+          {% endif %}
+          {% if not request.user.is_authenticated %}
+          <li><a href="/Login">Log In</a></li>
+			  	<li><a href="/signup">Sign Up</a></li>
+          {% else %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="/Profile">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="content">
+        <br>
+        <br>
+        <h1>EVENT MANAGEMENT</h1>
+        <p>Explore our site and book your event now</p>
+        <div>
+          <button type="button" onclick="window.location.href = '/Explore';"> <span></span>EXPLORE</button>
+          <button type="button" onclick="window.location.href = '/Booking';"> <span></span>BOOK NOW</button>
+        </div>
+        <br>
+        <br>
+
+        <h2>Want to host your job online? </h2>
+        <button type="button" onclick="window.location.href = '/hostre';">Host now</button>
+      </div>
+    </div>
+    <div class="contain">
+      <footer>
+        <div class="container">
+          <p>Contact us for any queries:</p>
+          <a href="tel:1234567890" class="contact">Call us</a>
+          <a href="mailto:maaj20056@gmail.com" class="contact">Email us</a>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="/Aboutus">About Us</a></li>
+          </ul>
+          <div class="social-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+          </div>
+          <p>&copy; 2023 Event Management System. All Rights Reserved.</p>
+        </div>
+      </footer>
+    </div>
+  
+</body>
+</html>

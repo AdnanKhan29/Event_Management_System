@@ -1,0 +1,301 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Event Organizer Website Design Tutorial</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'explore.css' %}">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"><span>E</span>VM</a>
+
+    <nav class="navbar">
+        <a href="/home">home</a>
+        <a href="/Booking">Booking</a>
+        <a href="/Aboutus">about</a>
+        <a href="/contact">Contact</a>
+          {% if not request.user.is_authenticated %}
+          <a href="/Login">Log In</a>
+		  <a href="/signup">Sign Up</a>
+          {% else %}
+          <a href="{% url 'logout' %}">Logout</a>
+          <a href="/Profile">Profile</a>
+          {% endif %}
+    </nav>
+
+    <div id="menu-bars" class="fas fa-bars"></div>
+
+</header>
+
+
+
+<!-- about section ends -->
+
+<!-- gallery section starts  -->
+<div>
+    <br>
+    <br>
+    <br>
+</div>
+
+<section class="gallery" id="gallery">
+
+    <h1 class="heading">our <span>gallery</span></h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="static/g-1.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-2.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-3.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-4.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-5.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-6.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-7.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-8.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="static/g-9.jpg" alt="">
+            <h3 class="title">photos and events</h3>
+            <div class="icons">
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share"></a>
+                <a href="#" class="fas fa-eye"></a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- gallery section ends -->
+<div>
+    <br>
+    <br>
+</div>
+<!-- price section starts  -->
+
+<section class="price" id="price">
+
+    <h1 class="heading"> our <span>price</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3 class="title">for birthdays</h3>
+            <h3 class="amount">$250.99</h3>
+            <ul>
+                <li><i class="fas fa-check"></i>full services</li>
+                <li> <i class="fas fa-check"></i> decorations </li>
+                <li> <i class="fas fa-check"></i> music and photos </li>
+                <li> <i class="fas fa-check"></i> food and drinks </li>
+                <li> <i class="fas fa-check"></i> invitation card </li>
+            </ul>
+            <a href="#" class="btn">check out</a>
+        </div>
+
+        <div class="box">
+            <h3 class="title">for weddings</h3>
+            <h3 class="amount">$450.99</h3>
+            <ul>
+                <li><i class="fas fa-check"></i>full services</li>
+                <li> <i class="fas fa-check"></i> decorations </li>
+                <li> <i class="fas fa-check"></i> music and photos </li>
+                <li> <i class="fas fa-check"></i> food and drinks </li>
+                <li> <i class="fas fa-check"></i> invitation card </li>
+            </ul>
+            <a href="#" class="btn">check out</a>
+        </div>
+
+        <div class="box">
+            <h3 class="title">for concerts</h3>
+            <h3 class="amount">$650.99</h3>
+            <ul>
+                <li><i class="fas fa-check"></i>full services</li>
+                <li> <i class="fas fa-check"></i> decorations </li>
+                <li> <i class="fas fa-check"></i> music and photos </li>
+                <li> <i class="fas fa-check"></i> food and drinks </li>
+                <li> <i class="fas fa-check"></i> invitation card </li>
+            </ul>
+            <a href="#" class="btn">check out</a>
+        </div>
+
+        <div class="box">
+            <h3 class="title">for others</h3>
+            <h3 class="amount">$850.99</h3>
+            <ul>
+                <li><i class="fas fa-check"></i>full services</li>
+                <li> <i class="fas fa-check"></i> decorations </li>
+                <li> <i class="fas fa-check"></i> music and photos </li>
+                <li> <i class="fas fa-check"></i> food and drinks </li>
+                <li> <i class="fas fa-check"></i> invitation card </li>
+            </ul>
+            <a href="#" class="btn">check out</a>
+        </div>
+
+    </div>
+
+
+</section>
+
+<!-- price section ends -->
+
+<!-- review section starts  -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>branches</h3>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> mumbai </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> jogeshwari </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> goregaon </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> navi mumbai </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> andheri </a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> service </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> about </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> gallery </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> price </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> reivew </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> contact </a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> anasshaikh@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+        </div>
+
+    </div>
+
+    <div class="credit"> created by <span>EVM</span> | all rights reserved </div>
+
+</section>
+
+<!-- footer section ends -->
+
+<!-- theme toggler  -->
+
+<div class="theme-toggler">
+
+    <div class="toggle-btn">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <h3>choose color</h3>
+
+    <div class="buttons">
+        <div class="theme-btn" style="background: #3867d6;"></div>
+        <div class="theme-btn" style="background: #f7b731;"></div>
+        <div class="theme-btn" style="background: #ff0033;"></div>
+        <div class="theme-btn" style="background: #20bf6b;"></div>
+        <div class="theme-btn" style="background: #fa8231;"></div>
+        <div class="theme-btn" style="background: #FC427B;"></div>
+    </div>
+
+</div>
+
+</body>
+</html>
